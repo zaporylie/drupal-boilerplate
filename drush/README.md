@@ -1,0 +1,1 @@
+Drush is super-usefull if you work partially on remote infrastructure. Use it to sync files or database, to check status of sites or run other commands.

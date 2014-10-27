@@ -1,0 +1,1 @@
+Do not change files in this folder. These are defaults and will be copied to destination places during setting new project (vagrant up with environmental variable SHELL_ARGS=new-project; check main README.md file for more info).
