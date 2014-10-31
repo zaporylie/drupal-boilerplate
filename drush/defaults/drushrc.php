@@ -31,7 +31,18 @@ $options['structure-tables'] = array(
   ),
 );
 $options['structure-tables-key'] = 'common';
+
 // Add usefull aliases.
 $options['shell-aliases']['noncore'] = 'pm-list --no-core';
 $options['shell-aliases']['wipe'] = 'cache-clear all';
 $options['shell-aliases']['unsuck'] = 'pm-disable -y overlay,dashboard';
+
+
+/**
+ * Use local.drushrc.php file to override Drush aliases configuration.
+ *
+ * Keep this code block at the end of this file to take full effect.
+ */
+if (file_exists(dirname(__FILE__) . '/local.drushrc.php')) {
+  include dirname(__FILE__) . '/local.drushrc.php';
+}

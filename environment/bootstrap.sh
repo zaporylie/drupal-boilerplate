@@ -30,6 +30,11 @@ if [ ! -d "/opt/provisioned" ]; then
   echo 'xdebug.remote_connect_back = 1' >> /etc/php5/apache2/php.ini
   echo 'xdebug.idekey = "vagrant"' >> /etc/php5/apache2/php.ini
   echo 'xdebug.remote_log="/var/log/xdebug/xdebug.log"' >> /etc/php5/apache2/php.ini
+  echo 'xdebug.profiler_enable_trigger = 1' >> /etc/php5/apache2/php.ini
+  echo 'xdebug.profiler_output_dir="/project/output"' >> /etc/php5/apache2/php.ini
+  echo 'xdebug.trace_enable_trigger = 1' >> /etc/php5/apache2/php.ini
+  echo 'xdebug.trace_output_dir = "/project/output"' >> /etc/php5/apache2/php.ini
+  echo 'xdebug.max_nesting_level = 1000' >> /etc/php5/apache2/php.ini
 
   echo '' >> /etc/php5/cli/php.ini
   echo ';;;;;;;;;;;;;;;;;;;;;;;;;;' >> /etc/php5/cli/php.ini
@@ -40,6 +45,11 @@ if [ ! -d "/opt/provisioned" ]; then
   echo 'xdebug.remote_connect_back = 1' >> /etc/php5/cli/php.ini
   echo 'xdebug.idekey = "vagrant"' >> /etc/php5/cli/php.ini
   echo 'xdebug.remote_log="/var/log/xdebug/xdebug.log"' >> /etc/php5/cli/php.ini
+  echo 'xdebug.profiler_enable_trigger = 1' >> /etc/php5/cli/php.ini
+  echo 'xdebug.profiler_output_dir="/project/output"' >> /etc/php5/cli/php.ini
+  echo 'xdebug.trace_enable_trigger = 1' >> /etc/php5/cli/php.ini
+  echo 'xdebug.trace_output_dir = "/project/output"' >> /etc/php5/cli/php.ini
+  echo 'xdebug.max_nesting_level = 1000' >> /etc/php5/cli/php.ini
 
   a2enmod rewrite
   cp /vagrant/apache/drupal.conf /etc/apache2/sites-available/
