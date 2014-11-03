@@ -52,7 +52,7 @@ if [ ! -d "/opt/provisioned" ]; then
   echo 'xdebug.max_nesting_level = 1000' >> /etc/php5/cli/php.ini
 
   a2enmod rewrite
-  cp /vagrant/apache/drupal.conf /etc/apache2/sites-available/
+  cp /environment/apache/drupal.conf /etc/apache2/sites-available/
   a2ensite drupal
   a2dissite 000-default
   usermod -a -G vagrant www-data
@@ -81,7 +81,6 @@ if [ ! -d "/opt/provisioned" ]; then
   cp -n /project/drush/defaults/drushrc.php /project/drush/drushrc.php
 
   # Install helper Drupal instance.
-  mkdir /home/vagrant
   /home/vagrant/.composer/vendor/drush/drush/drush dl drupal --destination=/home/vagrant --drupal-project-rename=drupal
 
   # Conditionally download drupal to /project/drupal folder and configure it
