@@ -21,7 +21,7 @@ $aliases['main'] = array(
   ),
 );
 
-// use '-o StrictHostKeyChecking=no' to make env accessible f or bootstrap.sh
+// use '-o StrictHostKeyChecking=no' to make new environment accessible for start.sh
 $aliases['staging'] = array(
   'parent' => '@main',
   // 'uri' => '', // i.e. www.example.com
@@ -63,7 +63,7 @@ $aliases['local'] = array(
   ),
 );
 
-// use '-o StrictHostKeyChecking=no' to make env accessible for bootstrap.sh
+// use '-o StrictHostKeyChecking=no' to make env accessible for start.sh
 $aliases['dev'] = array(
   'parent' => '@main, @local',
   // 'uri' => '', // i.e. www.example.com
