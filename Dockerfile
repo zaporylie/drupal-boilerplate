@@ -52,11 +52,6 @@ RUN wget https://github.com/drush-ops/drush/archive/6.x.zip && unzip 6.x.zip && 
 RUN cd /usr/local/src/drush && composer install
 RUN ln -s /usr/local/src/drush/drush /usr/bin/drush
 
-# Mysql root password
-ADD ./environment/mysql.sh /usr/local/bin/mysql.sh
-RUN chmod +x /usr/local/bin/mysql.sh
-RUN /usr/local/bin/mysql.sh
-
 # Supervisor Config
 RUN /usr/bin/easy_install supervisor
 ADD ./environment/supervisord.conf /etc/supervisord.conf

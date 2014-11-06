@@ -14,9 +14,6 @@ if [ ! -d "/opt/provisioned" ]; then
   apt-get -qq update
 
   # Install all kinds of useful stuff
-  echo 'mysql-server-5.1 mysql-server/root_password password drupal' | debconf-set-selections
-  echo 'mysql-server-5.1 mysql-server/root_password_again password drupal' | debconf-set-selections
-  #apt-get -qq -y install build-essential git curl vim apache2 php5 libapache2-mod-php5 mysql-server php-pear php5-gd php5-mysql libpcre3-dev php5-dev php-apc php5-xdebug
   apt-get -y install vim nano wget sendmail pwgen unzip git curl
   apt-get -y install apache2 php5 mysql-server mysql-client libapache2-mod-php5 php5-mysql
   apt-get -y install php5-curl php5-gd php5-intl php-pear php5-imap php5-memcache memcached mc php-apc php5-fpm
