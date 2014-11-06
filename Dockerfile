@@ -56,5 +56,8 @@ RUN ln -s /usr/local/src/drush/drush /usr/bin/drush
 RUN /usr/bin/easy_install supervisor
 ADD ./environment/supervisord.conf /etc/supervisord.conf
 
+RUN mkdir --parents /root/.drush
+RUN ln -s /project/drush/drushrc.php /root/.drush/drushrc.php
+
 EXPOSE 80
 CMD ["/bin/bash", "/project/environment/start.sh"]

@@ -34,14 +34,20 @@ if [ ! -d /project/drupal/sites/default ]; then
 fi
 
 if [ ! -f /project/drupal/sites/default/settings.php ] || [ $RESTART == true ]; then
+  # Reset settings file
+  rm -f /project/drupal/sites/default/settings.php
+
   # Set new mysql root password
-  /bin/bash ./mysql.sh
+  source /project/environment/mysql.sh
 
   # Install vanilla Drupal
   cd /project/drupal/
   DRUPAL_PASSWORD=`pwgen -c -n -1 12`
-  drush site-install standard -y --account-name=admin --db-url="mysqli://drupal:${DRUPAL_PASSWORD}@localhost/drupal" --db-su=root --db-su-pw=$MYSQL_PASSWORD
+  drush site-install minimal standard -y --account-name=admin --db-url="mysqli://drupal:${DRUPAL_PASSWORD}@localhost/drupal" --db-su=root --db-su-pw=$MYSQL_PASSWORD
 fi
+
+# Go back to your room!
+cd
 
 # Check if staging exists and if is accessible
 if [ $(drush sa | grep staging | wc -l) == 1 ]; then
