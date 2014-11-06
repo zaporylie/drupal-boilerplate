@@ -36,7 +36,7 @@ fi
 if [ ! -f /project/drupal/sites/default/settings.php ] || [ $RESTART == true ]; then
   # Install vanilla Drupal
   cd /project/drupal/
-  drush site-install standard -y --account-name=admin --db-url="mysqli://drupal:drupal@localhost/drupal" --db-su=root --db-su-pwd=$MYSQL_PASSWORD
+  drush site-install standard -y --account-name=admin --db-url="mysqli://drupal:drupal@localhost/drupal" --db-su=root --db-su-pw=$MYSQL_PASSWORD
 fi
 
 # Check if staging exists and if is accessible
