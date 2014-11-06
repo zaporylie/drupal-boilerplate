@@ -33,7 +33,7 @@ if [ ! -d /project/drupal/sites/default ]; then
   drush dl fpa, module_filter, coffee, stage_file_proxy, devel, search_krumo -y --destination=sites/all/modules/contrib
 fi
 
-if [ ! -f /project/drupal/sites/default/settings.php ] || [ $RESTART == true ]; then
+if [[ ! -f /project/drupal/sites/default/settings.php ]] || [[ $RESTART == true ]]; then
   # Reset settings file
   rm -f /project/drupal/sites/default/settings.php
 
