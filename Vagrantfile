@@ -4,14 +4,16 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.box_url = "https://vagrantcloud.com/ubuntu/boxes/trusty64"
-  config.vm.provision :shell, :path => "provision.sh", :args => ENV['SHELL_ARGS']
+  config.vm.provision :shell, :path => "environment/provision.sh", :args => ENV['SHELL_ARGS']
   config.vm.network :forwarded_port, guest: 80, host: 8777, auto_correct: true # IMPORTANT: Configure port
   config.vm.network :forwarded_port, guest: 22, host: 2777, auto_correct: true # IMPORTANT: Configure port
   config.vm.network :private_network, ip: '192.168.50.50' # IMPORTANT: Look out for collisions
   config.ssh.forward_agent = true
 
-  config.vm.synced_folder "../", "/project", id: "project-folder",
-    nfs: true
+  config.vm.synced_folder "./", "/project", id: "project-folder",
+    type: "true"
+  config.nfs.map_uid = Process.uid
+  config.nfs.map_gid = Process.gid
 
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", "1024"]
