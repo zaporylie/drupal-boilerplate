@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   config.vm.synced_folder "./", "/project", id: "project-folder",
-    type: "true"
+    nfs: "true"
   config.nfs.map_uid = Process.uid
   config.nfs.map_gid = Process.gid
 
