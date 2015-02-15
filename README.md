@@ -12,12 +12,12 @@
 1. Open your IDE and start coding
 
 ### Starting new project
-1. You can start new project by downloading this respository (do not clone it, you'll probably want to build new repository).
-1. Go to /Vagrantfile and specify ports forwarding for new project (it's easier to use defined ports)
-1. Use `vagrant up` to create new project. It will download last version of drupal for you, and place it in /drupal folder
-1. You will got also new set of drush-related files (in /drush), copied from /drush/defaults. Go to /drush/aliases/project.aliases.drushrc.php and setup project specific environmental data.
-1. Commit and push all changes to git repo. Be sure that user sensitive data is not stored in repository.
-1. Clone repo on dev and staging and configure it.
+1. To start new project download this respository (do not clone it, you'll probably want to build new repository). You can do that manually or faster way:
+`curl -s https://raw.githubusercontent.com/zaporylie/drupal-boilerplate/master/environment/install.sh | sh`
+**Just be sure that you are inside clean project directory when executing this command**
+1. Go to /Vagrantfile and specify ports forwarding for new project (it's just for your convinience easier to use defined ports)
+1. Use `vagrant up` to build new project. It will download last version of drupal for you, and place it in /drupal folder and install it with minimal profile.
+You will got also new set of drush-related files (in /drush), copied from /drush/defaults. Go to /drush/aliases/project.aliases.drushrc.php and setup project specific environmental data.
 
 ## Docker way
 You can build it first based on Dockerfile:
