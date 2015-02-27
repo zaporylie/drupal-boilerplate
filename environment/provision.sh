@@ -18,6 +18,7 @@ if [ ! -d "/opt/provisioned" ]; then
   apt-get -y install apache2 php5 mysql-server mysql-client libapache2-mod-php5 php5-mysql
   apt-get -y install php5-curl php5-gd php5-intl php-pear php5-imap php5-memcache memcached mc php-apc php5-fpm
   apt-get -y install php5-dev php5-xdebug libpcre3-dev
+  apt-get -y install ngrok-client
 
   mkdir /var/log/xdebug
   chown www-data:www-data /var/log/xdebug
