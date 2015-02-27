@@ -32,6 +32,9 @@ if [ ! -d "/opt/provisioned" ]; then
   echo 'xdebug.trace_output_dir = "/project/output"' >> /etc/php5/mods-available/xdebug.ini
   echo 'xdebug.max_nesting_level = 1000' >> /etc/php5/mods-available/xdebug.ini
 
+  # Turn on errors
+  sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/apache2/php.ini
+
   a2enmod rewrite
   cp /project/environment/apache/drupal.conf /etc/apache2/sites-available/
   a2ensite drupal
