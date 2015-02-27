@@ -35,6 +35,10 @@ if [ ! -d "/opt/provisioned" ]; then
   # Turn on errors
   sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/apache2/php.ini
 
+  # Add hostname to /etc/hosts
+  sed -i.bak  "s/127.0.0.1.*/& $HOSTNAME/" /etc/hosts
+  echo 'HostsFile=/etc/hosts' >> /etc/mail/sendmail.conf
+
   a2enmod rewrite
   cp /project/environment/apache/drupal.conf /etc/apache2/sites-available/
   a2ensite drupal
