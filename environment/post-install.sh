@@ -1,3 +1,5 @@
+echo "Result: ${METHOD_AUTO_RESULT}"
+
 # Check if SYNC_SOURCE exists and if is accessible
 if [ ${METHOD} == "existing" ]; then
   if [ "$(drush sa | grep "${SYNC_SOURCE}" | wc -l)" == 1 ]; then

@@ -5,7 +5,7 @@ datamysql:
 
 datadrupal:
   image: zaporylie/drupal
-  volumes:
+#  volumes:
 #    - ./:/application
   entrypoint: /bin/echo
   command: APP data-container
@@ -13,7 +13,7 @@ datadrupal:
 mysql:
   image: mysql:5.5
   environment:
-    - MYSQL_ROOT_PASSWORD=test
+    MYSQL_ROOT_PASSWORD: test
   volumes_from:
     - datamysql
 
@@ -27,9 +27,10 @@ drupal:
   links:
     - mysql:mysql
   environment:
-    - DRUPAL_DB=drupal_test
-    - METHOD=new
-    - VIRTUAL_HOST=drupal.*
+    DRUPAL_DB: drupal
+    VIRTUAL_HOST: drupal.*
+    DRUPAL_MAJOR_VERSION: 8
+    DRUPAL_PROFILE: standard
   ports:
     - "80"
     - "22"
