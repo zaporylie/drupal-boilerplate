@@ -1,0 +1,35 @@
+datamysql:
+  image: mysql:5.5
+  entrypoint: /bin/echo
+  command: MYSQL data-container
+
+datadrupal:
+  image: zaporylie/drupal
+  volumes:
+#    - ./:/application
+  entrypoint: /bin/echo
+  command: APP data-container
+
+mysql:
+  image: mysql:5.5
+  environment:
+    - MYSQL_ROOT_PASSWORD=test
+  volumes_from:
+    - datamysql
+
+drupal:
+  image: zaporylie/drupal
+  volumes_from:
+    - datadrupal
+  volumes:
+    - ./environment/pre-install.sh:/root/pre-install.sh
+    - ./environment/post-install.sh:/root/post-install.sh
+  links:
+    - mysql:mysql
+  environment:
+    - DRUPAL_DB=drupal_test
+    - METHOD=new
+    - VIRTUAL_HOST=drupal.*
+  ports:
+    - "80"
+    - "22"
