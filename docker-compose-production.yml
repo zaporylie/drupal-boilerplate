@@ -31,6 +31,8 @@ drupal:
     VIRTUAL_HOST: drupal.*
     DRUPAL_MAJOR_VERSION: 7
     DRUPAL_PROFILE: standard
+    SYNC: TRUE
+    SYNC_SOURCE: staging
   ports:
     - "80"
     - "22"
