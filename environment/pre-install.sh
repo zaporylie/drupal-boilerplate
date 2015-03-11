@@ -1,6 +1,9 @@
 #!/bin/sh
 
-composer global require drush/drush:6.1.0
+# For now only Drush 6 supports sql-sync
+if [ "${DRUPAL_MAJOR_VERSION}" = "7" ] && [ "${SYNC_METHOD}" = "AUTO" ]; then
+  composer global require drush/drush:6.1.0
+fi
 
 # Copy some defaults if do not exists
 for f in /app/drush/defaults/modules/* ; do cp -n "$f" "/app/drush/modules" ; done
