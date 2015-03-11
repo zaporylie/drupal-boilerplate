@@ -5,8 +5,8 @@ datamysql:
 
 datadrupal:
   image: zaporylie/drupal
-#  volumes:
-#    - ./:/application
+  volumes:
+    - ./:/app:ro
   entrypoint: /bin/echo
   command: APP data-container
 

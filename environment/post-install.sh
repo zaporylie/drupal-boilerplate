@@ -1,7 +1,14 @@
+#!/bin/sh
 echo "Result: ${METHOD_AUTO_RESULT}"
 
+
+# Make sure that we have all usefull modules for dev environment
+if [ "${ENVIRONMENT}" = "DEV" ]; then
+  cd /app/drupal && drush dl fpa, module_filter, coffee, stage_file_proxy, devel, search_krumo -y --destination=sites/all/modules/contrib
+fi
+
 # Check if SYNC_SOURCE exists and if is accessible
-if [ "${SYNC}" == "TRUE" ]; then
+if [ "${SYNC}" = "TRUE" ]; then
   if [ "$(drush sa | grep "${SYNC_SOURCE}" | wc -l)" == 1 ]; then
     if [ "$(drush @"${SYNC_SOURCE}" st | grep 'Connected' | wc -l)" == 1 ]; then
       # Sync site here!
