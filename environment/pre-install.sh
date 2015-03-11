@@ -24,6 +24,7 @@ ln -s ../../../../drush/drushrc.php /app/drupal/sites/all/drush/drushrc.php
 if [ ! -d /app/drupal/sites/${DRUPAL_SUBDIR}/files ]; then
   mkdir -p /app/public
   mkdir -p /app/public/${DRUPAL_SUBDIR}
+  mkdir -p /app/drupal/sites/${DRUPAL_SUBDIR}
   ln -s ../../public/${DRUPAL_SUBDIR} /app/drupal/sites/${DRUPAL_SUBDIR}/files
   chown www-data:www-data /app/public/${DRUPAL_SUBDIR}
 fi
@@ -32,7 +33,7 @@ if [ ! -d /app/private/${DRUPAL_SUBDIR} ]; then
   mkdir -p /app/private/${DRUPAL_SUBDIR}
   chown www-data:www-data /app/private/${DRUPAL_SUBDIR}
 fi
-sleep 10
+
 # Wait for database
 while ! mysql -h${MYSQL_HOST_NAME} -p${MYSQL_ENV_MYSQL_ROOT_PASSWORD}  -e ";" ; do
   sleep 0.5
