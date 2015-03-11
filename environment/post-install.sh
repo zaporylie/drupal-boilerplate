@@ -1,7 +1,7 @@
 echo "Result: ${METHOD_AUTO_RESULT}"
 
 # Check if SYNC_SOURCE exists and if is accessible
-if [ ${METHOD} == "existing" ]; then
+if [ "${SYNC}" == "TRUE" ]; then
   if [ "$(drush sa | grep "${SYNC_SOURCE}" | wc -l)" == 1 ]; then
     if [ "$(drush @"${SYNC_SOURCE}" st | grep 'Connected' | wc -l)" == 1 ]; then
       # Sync site here!

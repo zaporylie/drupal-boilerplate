@@ -1,8 +1,4 @@
-while ! mysql -h${MYSQL_PORT_3306_TCP_ADDR} -p${MYSQL_ENV_MYSQL_ROOT_PASSWORD}  -e ";" ; do
-  sleep 1s
+while ! mysql -h${MYSQL_HOST_NAME} -p${MYSQL_ENV_MYSQL_ROOT_PASSWORD}  -e ";" ; do
+  sleep 0.5
 done
-echo "Connected to ${MYSQL_PORT_3306_TCP_ADDR}";
-
-if [ ${METHOD} == 'new' ]; then
-  source /root/db-create.sh
-fi
+echo "Connected to ${MYSQL_HOST_NAME}";

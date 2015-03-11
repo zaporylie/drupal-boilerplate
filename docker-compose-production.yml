@@ -29,7 +29,7 @@ drupal:
   environment:
     DRUPAL_DB: drupal
     VIRTUAL_HOST: drupal.*
-    DRUPAL_MAJOR_VERSION: 8
+    DRUPAL_MAJOR_VERSION: 7
     DRUPAL_PROFILE: standard
   ports:
     - "80"
