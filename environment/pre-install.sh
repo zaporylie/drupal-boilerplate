@@ -24,18 +24,13 @@ mkdir -p /app/drupal/sites/all/drush
 # Symlink to drushrc inside sites/all/drush
 ln -s ../../../../drush/drushrc.php /app/drupal/sites/all/drush/drushrc.php
 
-if [ ! -d /app/drupal/sites/${DRUPAL_SUBDIR}/files ]; then
-  mkdir -p /app/public
-  mkdir -p /app/public/${DRUPAL_SUBDIR}
-  mkdir -p /app/drupal/sites/${DRUPAL_SUBDIR}
-  ln -s ../../public/${DRUPAL_SUBDIR} /app/drupal/sites/${DRUPAL_SUBDIR}/files
-  chown www-data:www-data /app/public/${DRUPAL_SUBDIR}
-fi
+mkdir -p /app/public
+mkdir -p /app/public/${DRUPAL_SUBDIR}
+chown www-data:www-data /app/public/${DRUPAL_SUBDIR}
 
-if [ ! -d /app/private/${DRUPAL_SUBDIR} ]; then
-  mkdir -p /app/private/${DRUPAL_SUBDIR}
-  chown www-data:www-data /app/private/${DRUPAL_SUBDIR}
-fi
+mkdir -p /app/private/${DRUPAL_SUBDIR}
+chown www-data:www-data /app/private/${DRUPAL_SUBDIR}
+
 
 # Wait for database
 while ! mysql -h${MYSQL_HOST_NAME} -p${MYSQL_ENV_MYSQL_ROOT_PASSWORD}  -e ";" ; do

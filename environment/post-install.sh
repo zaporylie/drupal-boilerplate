@@ -1,4 +1,11 @@
 #!/bin/sh
+
+if [ ! -d /app/drupal/sites/${DRUPAL_SUBDIR}/files ] || [ "${METHOD_AUTO_RESULT}" = "new_install" ]; then
+  rsync -av /app/drupal/sites/${DRUPAL_SUBDIR}/files/ /app/public/${DRUPAL_SUBDIR} 2>/dev/null
+  rm -rf /app/drupal/sites/${DRUPAL_SUBDIR}/files 2>/dev/null
+  ln -s ../../../public/${DRUPAL_SUBDIR} /app/drupal/sites/${DRUPAL_SUBDIR}/files
+fi
+
 echo "Result: ${METHOD_AUTO_RESULT}"
 
 # Make sure that we have all usefull modules for dev environment
@@ -20,7 +27,7 @@ if [ "${SYNC_METHOD}" = "AUTO" ]; then
     echo "Unable to sync: ${SYNC_SOURCE} is not defined"
   fi
 
-elif [[ "${SYNC_METHOD}" = "FILE" ] && [ -f /var/backups/db.sql ]]; then
+elif [ "${SYNC_METHOD}" = "FILE" ] && [ -f /var/backups/db.sql ]; then
   echo "File exist, start syncing"
   drush @local sql-cli -y < /var/backups/db.sql
 else
