@@ -1,5 +1,7 @@
 #!/bin/sh
 
+composer global require drush/drush:6.1.0
+
 # Copy some defaults if do not exists
 for f in /app/drush/defaults/modules/* ; do cp -n "$f" "/app/drush/modules" ; done
 cp -n /app/drush/defaults/aliases/app.aliases.drushrc.php /app/drush/aliases/app.aliases.drushrc.php

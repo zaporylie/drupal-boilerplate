@@ -24,6 +24,7 @@ drupal:
   volumes:
     - ./environment/pre-install.sh:/root/pre-install.sh
     - ./environment/post-install.sh:/root/post-install.sh
+    - ~/.ssh:/root/.ssh
   links:
     - mysql:mysql
   environment:
@@ -31,6 +32,8 @@ drupal:
     VIRTUAL_HOST: drupal.*
     DRUPAL_MAJOR_VERSION: 7
     DRUPAL_PROFILE: standard
+    SYNC: TRUE
+    SYNC_SOURCE: staging
   ports:
     - "80"
     - "22"
