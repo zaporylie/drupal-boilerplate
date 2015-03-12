@@ -2,24 +2,41 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
+
+  # Use Ubuntu 14.04 as a base image.
   config.vm.box = "ubuntu/trusty64"
+
+  # If trusty is not available - download it from there.
   config.vm.box_url = "https://vagrantcloud.com/ubuntu/boxes/trusty64"
+
+  # Build machine based on provision.sh file.
   config.vm.provision :shell, :path => "provision.sh", :args => ENV['SHELL_ARGS']
+
+  # This IP in private network should be free :)
   config.vm.network :private_network, ip: '10.254.254.254'
+
+  # Main hostname (will be added to /etc/hosts on your host.
   config.vm.hostname = "vagrant.dev"
+
+  # Prepare 12 more domain slots, although it's probably better to use tools like dynmasq
   config.hostsupdater.aliases = ["drupal1.dev", "drupal2.dev", "drupal3.dev", "drupal4.dev", "drupal5.dev", "drupal6.dev", "drupal7.dev", "drupal8.dev", "drupal9.dev", "drupal10.dev", "drupal11.dev", "drupal12.dev"]
+
+  # Forward ssh-agent
   config.ssh.forward_agent = true
 
-  config.vm.synced_folder "./", "/home/share",
+  # Mount parent folder (to this file) to /home/vagrant/projects
+  config.vm.synced_folder "./", "/home/vagrant/projects",
     id: "core",
     :nfs => true,
     :mount_options => ['nolock,vers=3,udp']
 
-  config.vm.synced_folder "~/.ssh", "/home/identity",
+  # Mount user .ssh folder to /home/vagrant/identity
+  config.vm.synced_folder "~/.ssh", "/home/vagrant/identity",
     id: "identity",
     :nfs => true,
     :mount_options => ['nolock,vers=3,udp']
 
+  # Set Virtual Box parameters
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", "1024"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]

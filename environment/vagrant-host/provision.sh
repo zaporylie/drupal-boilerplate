@@ -20,8 +20,6 @@ if [ ! -d "/opt/provisioned" ]; then
   curl -L https://github.com/docker/compose/releases/download/1.1.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
 
-  usermod -m -d /home/share vagrant
-
   docker pull zaporylie/drupal-dev
   docker pull mysql:5.5
 fi
