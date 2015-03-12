@@ -30,7 +30,7 @@ drupal:
   volumes:
     - ./environment/pre-install.sh:/root/pre-install.sh
     - ./environment/post-install.sh:/root/post-install.sh
-    - ~/.ssh:/root/.ssh:ro
+    # - ~/.ssh:/root/.ssh
     # - path/to/your/file:/var/backups/db.sql
   links:
     - mysql:mysql
@@ -44,7 +44,7 @@ drupal:
     DRUPAL_DOWNLOAD_METHOD: drush
     METHOD: auto
     MYSQL_HOST_NAME: mysql
-    VIRTUAL_HOST: drupal-dev.*
+    VIRTUAL_HOST: drupal1.*
     SYNC_METHOD: AUTO
     SYNC_SOURCE: staging
     ENVIRONMENT: DEV

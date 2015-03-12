@@ -72,7 +72,9 @@ drupal:
     # keys here.
     # You will be also allowed to ssh into container from another authorized
     # host (as root).
-    - ~/.ssh:/root/.ssh:ro
+    # If you are using vagrant-host from drupal-boilerplate:
+    # - /home/identity:/root/.ssh
+    - ~/.ssh:/root/.ssh
     # If you want to run database from sql-dump file, mount it in /var/backups/db
     # and set right sync method.
     # - path/to/your/file:/var/backups/db.sql

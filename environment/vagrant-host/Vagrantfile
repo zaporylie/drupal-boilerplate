@@ -6,8 +6,8 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "https://vagrantcloud.com/ubuntu/boxes/trusty64"
   config.vm.provision :shell, :path => "provision.sh", :args => ENV['SHELL_ARGS']
   config.vm.network :private_network, ip: '10.254.254.254'
-  config.vm.hostname = "host.dev"
-  config.hostsupdater.aliases = ["stot1.host.dev", "slot2.host.dev", "stot3.host.dev", "slot4.host.dev", "stot5.host.dev", "slot6.host.dev", "stot7.host.dev", "slot8.host.dev", "stot9.host.dev", "slot10.host.dev", "stot11.host.dev", "slot12.host.dev"]
+  config.vm.hostname = "vagrant.dev"
+  config.hostsupdater.aliases = ["drupal1.dev", "drupal2.dev", "drupal3.dev", "drupal4.dev", "drupal5.dev", "drupal6.dev", "drupal7.dev", "drupal8.dev", "drupal9.dev", "drupal10.dev", "drupal11.dev", "drupal12.dev"]
   config.ssh.forward_agent = true
 
   config.vm.synced_folder "./", "/home/share",
