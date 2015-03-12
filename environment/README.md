@@ -1,1 +1,1 @@
-Here you should keep all files related to environment flow.
+Keep VM/Docker container related files here (like install bash scripts).

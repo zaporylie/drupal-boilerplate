@@ -31,6 +31,10 @@ docker-compose --file=docker-compose-development.yml up -d
 Notice that flag -d means detached mode so use `docker-compose logs` for more
 information about running services.
 
+## Vagrant way
+
+(soon)
+
 ## Usefull containers:
 
 * Use [nginx-proxy](https://github.com/jwilder/nginx-proxy) to get domain support 
