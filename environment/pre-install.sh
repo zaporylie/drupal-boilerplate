@@ -26,10 +26,7 @@ ln -s ../../../../drush/drushrc.php /app/drupal/sites/all/drush/drushrc.php
 
 mkdir -p /app/public
 mkdir -p /app/public/${DRUPAL_SUBDIR}
-chown www-data:www-data /app/public/${DRUPAL_SUBDIR}
-
 mkdir -p /app/private/${DRUPAL_SUBDIR}
-chown www-data:www-data /app/private/${DRUPAL_SUBDIR}
 
 
 # Wait for database
