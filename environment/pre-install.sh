@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # For now only Drush 6 supports sql-sync
-if [ "${DRUPAL_MAJOR_VERSION}" = "7" ] && [ "${SYNC_METHOD}" = "AUTO" ] && [ "$(drush st | grep -i 'Drush version' | awk -F ':' '{print $2}' |  sed -e 's/^[ \t]*//')" -ne "6.1.0" ]; then
+if [ "${DRUPAL_MAJOR_VERSION}" = "7" ] && [ "${SYNC_METHOD}" = "AUTO" ] && [ "$(drush st | grep -i 'Drush version' | awk -F ':' '{print $2}' |  sed -e 's/^[ \t]*//')" != "6.1.0" ]; then
   composer global require drush/drush:6.1.0
 fi
 
@@ -14,7 +14,7 @@ cp -n /app/drush/defaults/local.drushrc.php /app/drush/local.drushrc.php
 
 # Symlink to project drushrc.php file.
 mkdir -p $HOME/.drush
-ln -s /app/drush/drushrc.php $HOME/.drush/drushrc.php
+ln -s /app/drush/drushrc.php $HOME/.drush/drushrc.php > /dev/null 2>&1
 
 # Create basic module containers
 mkdir -p /app/drupal/sites/all/modules/contrib
@@ -22,7 +22,7 @@ mkdir -p /app/drupal/sites/all/modules/custom
 mkdir -p /app/drupal/sites/all/drush
 
 # Symlink to drushrc inside sites/all/drush
-ln -s ../../../../drush/drushrc.php /app/drupal/sites/all/drush/drushrc.php
+ln -s ../../../../drush/drushrc.php /app/drupal/sites/all/drush/drushrc.php > /dev/null 2>&1
 
 mkdir -p /app/public
 mkdir -p /app/public/${DRUPAL_SUBDIR}
