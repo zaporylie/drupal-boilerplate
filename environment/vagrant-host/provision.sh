@@ -13,6 +13,10 @@ if [ ! -d "/opt/provisioned" ]; then
   # Install required tools
   apt-get update && apt-get -y install curl vim nano
 
+  # To avoid using sudo each time, add vagrant user to docker group
+  sudo groupadd docker
+  sudo gpasswd -a vagrant docker
+
   # Install docker
   curl -sSL https://get.docker.com/ubuntu/ | sudo sh
 

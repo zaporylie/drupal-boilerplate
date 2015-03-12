@@ -1,15 +1,15 @@
 #!/bin/sh
 
-if [ ! -d /app/drupal/sites/${DRUPAL_SUBDIR}/files ] || [ "${METHOD_AUTO_RESULT}" = "new_install" ]; then
-  rsync -av /app/drupal/sites/${DRUPAL_SUBDIR}/files/ /app/public/${DRUPAL_SUBDIR} 2>/dev/null
-  rm -rf /app/drupal/sites/${DRUPAL_SUBDIR}/files 2>/dev/null
-  ln -s ../../../public/${DRUPAL_SUBDIR} /app/drupal/sites/${DRUPAL_SUBDIR}/files
+if ( [ ! -d /app/drupal/sites/${DRUPAL_SUBDIR}/files ] && [ ! -L /app/drupal/sites/${DRUPAL_SUBDIR}/files ] ) || [ "${METHOD_AUTO_RESULT}" = "new_install" ]; then
+  rsync -av /app/drupal/sites/${DRUPAL_SUBDIR}/files/ /app/public/${DRUPAL_SUBDIR}  > /dev/null 2>&1
+  rm -rf /app/drupal/sites/${DRUPAL_SUBDIR}/files  > /dev/null 2>&1
+  ln -s ../../../public/${DRUPAL_SUBDIR} /app/drupal/sites/${DRUPAL_SUBDIR}/files > /dev/null 2>&1
 fi
 
 echo "Result: ${METHOD_AUTO_RESULT}"
 
 # Make sure that we have all usefull modules for dev environment
-if [ "${ENVIRONMENT}" = "DEV" ]; then
+if [ "${ENVIRONMENT}" = "DEV" ] && [ "${METHOD_AUTO_RESULT}" = "new_install" ]; then
   cd /app/drupal && drush dl fpa, module_filter, coffee, stage_file_proxy, devel, search_krumo, reroute_email -y --destination=sites/all/modules/contrib
 fi
 

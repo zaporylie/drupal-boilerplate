@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # For now only Drush 6 supports sql-sync
-if [ "${DRUPAL_MAJOR_VERSION}" = "7" ] && [ "${SYNC_METHOD}" = "AUTO" ]; then
+if [ "${DRUPAL_MAJOR_VERSION}" = "7" ] && [ "${SYNC_METHOD}" = "AUTO" ] && [ "$(drush st | grep -i 'Drush version' | awk -F ':' '{print $2}' |  sed -e 's/^[ \t]*//')" -ne "6.1.0" ]; then
   composer global require drush/drush:6.1.0
 fi
 
