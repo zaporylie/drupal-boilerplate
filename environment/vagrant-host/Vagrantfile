@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.box_url = "https://vagrantcloud.com/ubuntu/boxes/trusty64"
+  config.vm.provision :shell, :path => "provision.sh", :args => ENV['SHELL_ARGS']
+  config.vm.network :private_network, ip: '10.254.254.254'
+  config.vm.hostname = "host.dev"
+  config.hostsupdater.aliases = ["stot1.host.dev", "slot2.host.dev", "stot3.host.dev", "slot4.host.dev", "stot5.host.dev", "slot6.host.dev", "stot7.host.dev", "slot8.host.dev", "stot9.host.dev", "slot10.host.dev", "stot11.host.dev", "slot12.host.dev"]
+  config.ssh.forward_agent = true
+
+  config.vm.synced_folder "./", "/home/share",
+    id: "core",
+    :nfs => true,
+    :mount_options => ['nolock,vers=3,udp']
+
+  config.vm.synced_folder "~/.ssh", "/home/identity",
+    id: "identity",
+    :nfs => true,
+    :mount_options => ['nolock,vers=3,udp']
+
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  end
+
+end
