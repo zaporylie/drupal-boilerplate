@@ -5,8 +5,9 @@ to Docker first. Use it to start new Drupal project.
 
 ## Docker way
 
-Right now this is the only one supported way of running you project.
-VM with Vagrant will show up soon (eventually).
+Right now this is the only supported way of running projects, although
+you can run vagrant host around docker containers for OSX support (it's still
+much faster than separate VBox-per-project).
 
 ### Requirements
 
@@ -33,7 +34,7 @@ information about running services.
 
 ## Vagrant way
 
-(soon)
+For vagrant support, check /enviroment/vagrant-host 
 
 ## Usefull containers:
 
