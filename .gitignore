@@ -2,8 +2,7 @@
 #########################
 # Ignore configuration files that may contain sensitive information.
 drupal/sites/*/settings*.php
-drush/local.aliases.drushrc.php
-drush/local.drushrc.php
+drush/local.*
 
 # PHPStorm user sensitive files #
 #################################
@@ -14,9 +13,7 @@ drush/local.drushrc.php
 # User Generated Content #
 ##########################
 drupal/sites/*/files
-drupal/sites/*/private
 private/*/*
-public/*/*
 
 # Vagrant Files #
 #################

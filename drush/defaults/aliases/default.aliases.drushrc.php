@@ -1,6 +1,6 @@
 <?php
 
-$aliases['main'] = array(
+$aliases['default.main'] = array(
   'target-command-specific' => array (
     'sql-sync' => array(
       // Add general options for sql-sync target here.
@@ -22,24 +22,24 @@ $aliases['main'] = array(
 );
 
 // use '-o StrictHostKeyChecking=no' to make new environment accessible for start.sh
-$aliases['staging'] = array(
-  'parent' => '@main',
+$aliases['default.staging'] = array(
+  'parent' => '@default.main',
   // 'uri' => '', // i.e. www.example.com
   // 'root' => '', // i.e. /var/www/example.com
   // 'remote-host' => '', // i.e. dev.example.com
   // 'ssh-options' => '-o StrictHostKeyChecking=no', // i.e. -p 23  -o StrictHostKeyChecking=no
 );
 
-$aliases['prod'] = array(
-  'parent' => '@main',
+$aliases['default.prod'] = array(
+  'parent' => '@default.main',
   // 'uri' => '', // i.e. www.example.com
   // 'root' => '', // i.e. /var/www/example.com
   // 'remote-host' => '', // i.e. dev.example.com
   // 'ssh-options' => '', // i.e. -p 23
 );
 
-$aliases['local'] = array(
-  'parent' => '@main',
+$aliases['default.local'] = array(
+  'parent' => '@default.main',
   'root' => dirname(__FILE__) . '/../../drupal',
   'uri' => 'localhost',
   'target-command-specific' => array (
@@ -68,8 +68,8 @@ $aliases['local'] = array(
 );
 
 // use '-o StrictHostKeyChecking=no' to make env accessible for start.sh
-$aliases['dev'] = array(
-  'parent' => '@main, @local',
+$aliases['default.dev'] = array(
+  'parent' => '@default.main, @default.local',
   // 'uri' => '', // i.e. www.example.com
   // 'root' => '', // i.e. /var/www/example.com
   // 'remote-host' => '', // i.e. dev.example.com
@@ -83,6 +83,6 @@ $aliases['dev'] = array(
  *
  * Keep this code block at the end of this file to take full effect.
  */
-if (file_exists(dirname(__FILE__) . '/../local.aliases.drushrc.php')) {
-  include dirname(__FILE__) . '/../local.aliases.drushrc.php';
+if (file_exists(dirname(__FILE__) . '/../local.default.aliases.drushrc.php')) {
+  include dirname(__FILE__) . '/../local.default.aliases.drushrc.php';
 }
