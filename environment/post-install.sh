@@ -21,7 +21,7 @@ if [ "${SYNC_METHOD}" = "AUTO" ]; then
       # Change max_allowed_packet
       mysql -h${MYSQL_HOST_NAME} -p${MYSQL_ENV_MYSQL_ROOT_PASSWORD} -e "set global max_allowed_packet=64*1024*1024;"
       # Sync site here!
-      drush sql-sync @"${DRUPAL_SUBDIR}.${SYNC_SOURCE}" @"${DRUPAL_SUBDIR}".local -y
+      drush sql-sync @"${DRUPAL_SUBDIR}.${SYNC_SOURCE}" @"${DRUPAL_SUBDIR}.local" -y
     else
       echo "Unable to sync: cannot connect to ${DRUPAL_SUBDIR}.${SYNC_SOURCE}"
     fi
@@ -33,7 +33,7 @@ elif [ "${SYNC_METHOD}" = "FILE" ] && [ -f /var/backups/db.sql ]; then
   # Change max_allowed_packet
   mysql -h${MYSQL_HOST_NAME} -p${MYSQL_ENV_MYSQL_ROOT_PASSWORD} -e "set global max_allowed_packet=64*1024*1024;"
   echo "File exist, start syncing"
-  drush @"${DRUPAL_SUBDIR}.${SYNC_SOURCE}" sql-cli -y < /var/backups/db.sql
+  cd /app/drupal/sites/${DRUPAL_SUBDIR} && drush sql-cli -y < /var/backups/db.sql
 else
   echo "Do nothing"
 fi
