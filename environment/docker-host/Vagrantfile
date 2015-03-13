@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: '10.254.254.254'
 
   # Main hostname (will be added to /etc/hosts on your host.
-  config.vm.hostname = "vagrant.dev"
+  config.vm.hostname = "docker.dev"
 
   # Prepare 12 more domain slots, although it's probably better to use tools like dynmasq
   config.hostsupdater.aliases = ["drupal1.dev", "drupal2.dev", "drupal3.dev", "drupal4.dev", "drupal5.dev", "drupal6.dev", "drupal7.dev", "drupal8.dev", "drupal9.dev", "drupal10.dev", "drupal11.dev", "drupal12.dev"]

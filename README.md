@@ -34,7 +34,7 @@ information about running services.
 
 ## Vagrant way
 
-For vagrant support, check /enviroment/vagrant-host 
+For vagrant support, check /environment/docker-host 
 
 ## Usefull containers:
 
