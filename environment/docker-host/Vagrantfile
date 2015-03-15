@@ -25,10 +25,18 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   # Mount parent folder (to this file) to /home/vagrant/projects
-  config.vm.synced_folder "./", "/home/vagrant/projects",
+  config.vm.synced_folder "./", "/nfs-tmp",
     id: "core",
     :nfs => true,
     :mount_options => ['nolock,vers=3,udp']
+  config.bindfs.bind_folder "/nfs-tmp", "/home/vagrant/projects",
+    create_as_user: true,
+    perms: "u=u:g=g:o=o",
+    user: 0,
+    group: 0,
+    :'chown-ignore' => true,
+    :'chgrp-ignore' => true,
+    :'chmod-ignore' => true
 
   # Mount user .ssh folder to /home/vagrant/identity
   config.vm.synced_folder "~/.ssh", "/home/vagrant/identity",
