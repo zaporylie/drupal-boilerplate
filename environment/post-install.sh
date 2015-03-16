@@ -15,7 +15,7 @@ fi
 
 # Check if SYNC_SOURCE exists and if is accessible
 echo "Synchronization method: ${SYNC_METHOD}"
-if [ "${SYNC_METHOD}" = "AUTO" ]; then
+if [ "${SYNC_METHOD}" = "AUTO" ] && [ "${METHOD_AUTO_RESULT}" = "new_install" ]; then
   if [ "$(drush sa | grep "${DRUPAL_SUBDIR}.${SYNC_SOURCE}" | wc -l)" == 1 ]; then
     if [ "$(drush @"${DRUPAL_SUBDIR}.${SYNC_SOURCE}" st | grep 'Connected' | wc -l)" == 1 ]; then
       # Change max_allowed_packet
@@ -29,7 +29,7 @@ if [ "${SYNC_METHOD}" = "AUTO" ]; then
     echo "Unable to sync: ${DRUPAL_SUBDIR}.${SYNC_SOURCE} is not defined"
   fi
 
-elif [ "${SYNC_METHOD}" = "FILE" ] && [ -f /var/backups/db.sql ]; then
+elif [ "${SYNC_METHOD}" = "FILE" ] && [ -f /var/backups/db.sql ] && [ "${METHOD_AUTO_RESULT}" = "new_install" ]; then
   # Change max_allowed_packet
   mysql -h${MYSQL_HOST_NAME} -p${MYSQL_ENV_MYSQL_ROOT_PASSWORD} -e "set global max_allowed_packet=64*1024*1024;"
   echo "File exist, start syncing"
