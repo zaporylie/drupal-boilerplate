@@ -46,10 +46,11 @@ Vagrant.configure("2") do |config|
 
   # Set Virtual Box parameters
   config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
     vb.memory = 4096
     vb.cpus = 2
+    vb.name = "docker_host"
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
 
 end
