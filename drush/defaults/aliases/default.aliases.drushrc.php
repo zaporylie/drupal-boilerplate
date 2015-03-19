@@ -1,6 +1,12 @@
 <?php
+/**
+ * @file
+ * Word "default" means drupal/sites/default folder. If you have multisite drupal
+ * configuration create a copy of this file for each site (change default to
+ * specific name).
+ */
 
-$aliases['default.main'] = array(
+$aliases['main'] = array(
   'target-command-specific' => array (
     'sql-sync' => array(
       // Add general options for sql-sync target here.
@@ -22,24 +28,24 @@ $aliases['default.main'] = array(
 );
 
 // use '-o StrictHostKeyChecking=no' to make new environment accessible for start.sh
-$aliases['default.staging'] = array(
-  'parent' => '@default.main',
+$aliases['staging'] = array(
+  'parent' => '@main',
   // 'uri' => '', // i.e. www.example.com
   // 'root' => '', // i.e. /var/www/example.com
   // 'remote-host' => '', // i.e. dev.example.com
   // 'ssh-options' => '-o StrictHostKeyChecking=no', // i.e. -p 23  -o StrictHostKeyChecking=no
 );
 
-$aliases['default.prod'] = array(
-  'parent' => '@default.main',
+$aliases['prod'] = array(
+  'parent' => '@main',
   // 'uri' => '', // i.e. www.example.com
   // 'root' => '', // i.e. /var/www/example.com
   // 'remote-host' => '', // i.e. dev.example.com
   // 'ssh-options' => '', // i.e. -p 23
 );
 
-$aliases['default.local'] = array(
-  'parent' => '@default.main',
+$aliases['local'] = array(
+  'parent' => '@main',
   'root' => dirname(__FILE__) . '/../../drupal',
   'uri' => 'localhost',
   'target-command-specific' => array (
@@ -68,8 +74,8 @@ $aliases['default.local'] = array(
 );
 
 // use '-o StrictHostKeyChecking=no' to make env accessible for start.sh
-$aliases['default.dev'] = array(
-  'parent' => '@default.main, @default.local',
+$aliases['dev'] = array(
+  'parent' => '@main, @local',
   // 'uri' => '', // i.e. www.example.com
   // 'root' => '', // i.e. /var/www/example.com
   // 'remote-host' => '', // i.e. dev.example.com
@@ -79,7 +85,9 @@ $aliases['default.dev'] = array(
 /**
  * Load local development override configuration, if available.
  *
- * Use local.aliases.drushrc.php to override Drush aliases configuration.
+ * Use local.default.aliases.drushrc.php to override Drush aliases configuration.
+ * If you will copy this file to add drush alias to another drupal site folder
+ * (sites/*) copy local... file as well and change name below.
  *
  * Keep this code block at the end of this file to take full effect.
  */
