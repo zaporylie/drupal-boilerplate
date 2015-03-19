@@ -1,0 +1,2 @@
+*.module linguist-language=PHP
+*.inc linguist-language=PHP
