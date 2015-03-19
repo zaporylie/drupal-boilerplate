@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-wget https://github.com/zaporylie/drupal-boilerplate/archive/master.zip
-unzip master.zip
-cd drupal-boilerplate-master && mv -f * .[^.]* ../ && cd ../
+curl -Lk https://github.com/zaporylie/drupal-boilerplate/archive/master.tar.gz |  tar -zxf -
+cp -Ri drupal-boilerplate-master/* drupal-boilerplate-master/.[^.]* ./
 rm -Rf drupal-boilerplate-master
-rm master.zip

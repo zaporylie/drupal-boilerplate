@@ -1,38 +1,50 @@
-# Drupal Boilerplate
+# Drupal Boilerplate for D7 and D8 projects
 
-## Vagrant way
-
-### Getting started with existing project
-1. Be sure that your identity is available to the local ssh-agent, use: `ssh-add -L`. Add it if not: `ssh-add ~/.ssh/id_rsa`
-1. Copy /drush/defaults/aliases/local.aliases.drushrc.php to /drush and specify your username for each environment.
-1. Type `vagrant up` in terminal to start new VirtualBox
-1. Use ports specified in /environment/Vagrantfile to reach your services (could be different in case of collisions)
-1. Login to vagrant via ssh: `vagrant ssh`
-1. Create feature branch from develop or staging branch
-1. Open your IDE and start coding
-
-### Starting new project
-1. To start new project download this respository (do not clone it, you'll probably want to build new repository). You can do that manually or faster way:
-`curl -s https://raw.githubusercontent.com/zaporylie/drupal-boilerplate/master/environment/install.sh | sh`
-**Just be sure that you are inside clean project directory when executing this command**
-1. Go to /Vagrantfile and specify ports forwarding for new project (it's just for your convinience easier to use defined ports)
-1. Use `vagrant up` to build new project. It will download last version of drupal for you, and place it in /drupal folder and install it with minimal profile.
-You will got also new set of drush-related files (in /drush), copied from /drush/defaults. Go to /drush/aliases/project.aliases.drushrc.php and setup project specific environmental data.
+This is new version of this boilerplate project which is Docker-oriented 
+only. Use it to start new Drupal project.
 
 ## Docker way
-You can build it first based on Dockerfile:
-````
-docker build -t zaporylie/drupal-boilerplate <path_to_Dockerfile_directory>
-````
 
-than:
+Right now this is the only supported way of running projects, although
+you can run docker host with vagrant for OSX support (it's still
+much faster than separate VBox-per-project).
 
-1. Be sure that your ssh identity allows you to connect @staging server (in case you want to work on existing project - syn via drush sql-sync @staging @local)
-1. Copy /drush/defaults/aliases/local.aliases.drushrc.php to /drush and specify your username for each environment.
-1. Run command: 
-````
-docker run --name='<container_name>' -d -t -i -e VIRTUAL_HOST=<domain_if_you_use_nginx_proxy> -v <path_to_project>:/project -v ~/.ssh:/root/.ssh zaporylie/drupal-boilerplate
-````
+### Requirements
 
-* Use [nsenter](https://github.com/jpetazzo/nsenter) to connect your Docker: `docker-enter <container_name>`
-* Use [nginx-proxy](https://github.com/jwilder/nginx-proxy) to setup domain for new project
+* [docker](https://docs.docker.com/installation/ubuntulinux/)
+````
+# You can use this command on Ubuntu to install it.
+curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+````
+* [docker-compose](http://docs.docker.com/compose/install/)
+````
+# The easiest way to install on ubuntu is:
+curl -L https://github.com/docker/compose/releases/download/1.1.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+````
+or run docker-host which will install everything for you.
+
+### Running
+
+All you need is one of these commands:
+````
+# To run selected yml file:
+docker-compose --file=docker-compose-production.yml up -d
+# To run default file (docker-compose.yml):
+docker-compose up -d
+# or create another .yml file right for your environment/configuration
+# and run it.
+````
+Notice, that flag -d means detached mode, so use `docker-compose logs` for more
+information about running services.
+
+## Vagrant (docker-host)
+
+For vagrant support, check [/environment/docker-host](environment/docker-host)
+
+## Usefull containers:
+
+* Use [nginx-proxy](https://github.com/jwilder/nginx-proxy) to get domain support 
+for new project and proxy traffic on port 80 (eventually 443) to your container
+(which, by default, has random port).
+Notice, that nginx-proxy will be ready and running if you will start with [docker-host](environment/docker-host)

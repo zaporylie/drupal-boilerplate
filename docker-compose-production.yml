@@ -1,0 +1,119 @@
+# Run this configuration if you don't need xdebug
+#
+# @author zaporylie <jakub@piaseccy.pl>
+
+# Data-only container
+#
+# This is a container without any running process. Will be stooped right after
+# creation. As long as you won't delete it it will hold mysql data for you.
+datamysql:
+  # We don't want to waist space on your disk so instead of having new, small
+  # container (like busybox) let's use the same image as for mysql deamon.
+  image: mysql:5.5
+  # No need to run process so change entry point to echo
+  entrypoint: /bin/echo
+  # Display "MySQL data-only container" message if container will be started
+  command: MySQL data-only container
+
+# Data-only container
+#
+# This is another container without any process involved. Will hold files in
+# strict structure. You can mount more than only one volume but /app is required
+# by [drupal] container.
+datadrupal:
+  # It takes zaporylie/drupal parent image
+  # @see https://registry.hub.docker.com/u/zaporylie/drupal
+  image: zaporylie/drupal
+  # Gets parent folder (for this file) and mount it as /app
+  volumes:
+    - ./:/app
+  # No need to run process so change entry point to echo
+  entrypoint: /bin/echo
+  # Display "APP data-only container" message if container will be started
+  command: APP data-only container
+
+# MySQL process container
+#
+# This container will run mysql deamon for you with data from [datamysql]
+# container
+mysql:
+  # Official MySQL docker image, version 5.5 (you can use 5.6, 5.7 as well)
+  # @see https://registry.hub.docker.com/_/mysql/
+  image: mysql:5.5
+  # Define enviromental variables used by this image
+  environment:
+    # You can (and should!) change <secret_password> to something else.
+    MYSQL_ROOT_PASSWORD: secret_password
+  # Take all volumes exposed by [datamysql] and mount it here.
+  volumes_from:
+    - datamysql
+
+# Drupal container
+#
+# This container will run standard apache, php, sshd configuration
+drupal:
+  # apache, php, sshd - all you need (mysql in separate container).
+  # supervisor takes care to run all services for you.
+  # @see https://registry.hub.docker.com/u/zaporylie/drupal
+  image: zaporylie/drupal
+  # Mount data from data-only container.
+  volumes_from:
+    - datadrupal
+  # All volumes in that section are optional
+  volumes:
+    # This are pre and post-install scripts (check start.sh provided by
+    # zaporylie/drupal to be sure what excacly install means in that case).
+    # If /root/pre-install.sh or /root/post-install.sh will be mounted to
+    # container you can use it to specify some additional installation
+    # procedures.
+    - ./environment/pre-install.sh:/root/pre-install.sh
+    - ./environment/post-install.sh:/root/post-install.sh
+    # If you want to use sql-sync-like automate procedures, we need authorized
+    # keys here.
+    # You will be also allowed to ssh into container from another authorized
+    # host (as root).
+    # If you are using vagrant-host from drupal-boilerplate:
+    # - /home/vagrant/identity:/root/.ssh
+    - ~/.ssh:/root/.ssh
+    # If you want to run database from sql-dump file, mount it in /var/backups/db
+    # and set right sync method.
+    # - path/to/your/file:/var/backups/db.sql
+  # Links to mysql process (via socket).
+  links:
+    # First [mysql] is name of deamon container, second <mysql> is required by
+    # application. If you want to change it, set MYSQL_HOST_NAME as well.
+    - mysql:mysql
+  environment:
+    # PARENT IMAGE RELATED VARIABLES:
+    # @see https://registry.hub.docker.com/u/zaporylie/drupal
+    DRUPAL_DB: drupal
+    DRUPAL_DB_USER: drupal
+    DRUPAL_DB_PASSWORD: drupal
+    DRUPAL_PROFILE: standard
+    DRUPAL_SUBDIR: default
+    DRUPAL_MAJOR_VERSION: 7
+    DRUPAL_DOWNLOAD_METHOD: drush
+    METHOD: auto
+    MYSQL_HOST_NAME: mysql
+    #
+    # NGINX PROXY RELATED VARIABLES
+    VIRTUAL_HOST: drupal.*
+    #
+    # APPLICATION RELATED VARIABLES:
+    # AUTO means take recreate db from SYNC_SOURCE with drush sql-sync command
+    # FILE is corresponding to volume mounted as /var/backups/db.sql
+    SYNC_METHOD: FILE
+    # SYNC_SOURCE is required by AUTO SYNC_METHOD and should be related to
+    # alias defined in /drush/aliases/app.aliases.drushrc.php file (by default
+    # dev, staging or prod)
+    SYNC_SOURCE: none
+    # ENVIRONMENT is used to download some usefull modules which might not be in
+    # your repo yet. DEV means download: fpa, module_filter, coffee,
+    # stage_file_proxy, devel, search_krumo, reroute_email
+    ENVIRONMENT: PROD
+  # These are ports which will be exposed on docker-compose up and mapped to
+  # available ports on host. You can lock host port, ex. 22:42222 (ssh will be
+  # available on port 42222 from outside of container).
+  ports:
+    - "80"
+    - "22"

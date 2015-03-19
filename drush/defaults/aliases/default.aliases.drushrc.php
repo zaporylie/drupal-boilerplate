@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * Word "default" means drupal/sites/default folder. If you have multisite drupal
+ * configuration create a copy of this file for each site (change default to
+ * specific name).
+ */
 
 $aliases['main'] = array(
   'target-command-specific' => array (
@@ -79,10 +85,12 @@ $aliases['dev'] = array(
 /**
  * Load local development override configuration, if available.
  *
- * Use local.aliases.drushrc.php to override Drush aliases configuration.
+ * Use local.default.aliases.drushrc.php to override Drush aliases configuration.
+ * If you will copy this file to add drush alias to another drupal site folder
+ * (sites/*) copy local... file as well and change name below.
  *
  * Keep this code block at the end of this file to take full effect.
  */
-if (file_exists(dirname(__FILE__) . '/../local.aliases.drushrc.php')) {
-  include dirname(__FILE__) . '/../local.aliases.drushrc.php';
+if (file_exists(dirname(__FILE__) . '/../local.default.aliases.drushrc.php')) {
+  include dirname(__FILE__) . '/../local.default.aliases.drushrc.php';
 }
