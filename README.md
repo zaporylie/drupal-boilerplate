@@ -42,6 +42,12 @@ information about running services.
 
 For vagrant support, check [/environment/docker-host](environment/docker-host)
 
+### Requirements for vagrant docker-host
+
+- [Vagrant, obviously](https://www.vagrantup.com/)
+- bindfs plugin (Install with `vagrant plugin install vagrant-bindfs`)
+- hostsupdater plugin (Install with `vagrant plugin install vagrant-hostsupdater`)
+
 ## Usefull containers:
 
 * Use [nginx-proxy](https://github.com/jwilder/nginx-proxy) to get domain support 
