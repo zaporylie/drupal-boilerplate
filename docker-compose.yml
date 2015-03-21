@@ -38,7 +38,7 @@ drupal:
     DRUPAL_DB: drupal
     DRUPAL_DB_USER: drupal
     DRUPAL_DB_PASSWORD: drupal
-    DRUPAL_PROFILE: standard
+    DRUPAL_PROFILE: minimal
     DRUPAL_SUBDIR: default
     DRUPAL_MAJOR_VERSION: 7
     DRUPAL_DOWNLOAD_METHOD: drush

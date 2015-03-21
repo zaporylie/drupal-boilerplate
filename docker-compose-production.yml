@@ -104,7 +104,7 @@ drupal:
     # FILE is corresponding to volume mounted as /var/backups/db.sql
     SYNC_METHOD: FILE
     # SYNC_SOURCE is required by AUTO SYNC_METHOD and should be related to
-    # alias defined in /drush/aliases/app.aliases.drushrc.php file (by default
+    # alias defined in /drush/aliases/default.aliases.drushrc.php file (by default
     # dev, staging or prod)
     SYNC_SOURCE: none
     # ENVIRONMENT is used to download some usefull modules which might not be in
