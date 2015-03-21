@@ -28,8 +28,8 @@ drupal:
   volumes_from:
     - datadrupal
   volumes:
-    - ./environment/pre-install.sh:/root/pre-install.sh
-    - ./environment/post-install.sh:/root/post-install.sh
+    - ./scripts/pre-install.sh:/root/pre-install.sh
+    - ./scripts/post-install.sh:/root/post-install.sh
     # - ~/.ssh:/root/.ssh
     # - path/to/your/file:/var/backups/db.sql
   links:

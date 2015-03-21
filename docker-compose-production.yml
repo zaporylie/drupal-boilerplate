@@ -66,8 +66,8 @@ drupal:
     # If /root/pre-install.sh or /root/post-install.sh will be mounted to
     # container you can use it to specify some additional installation
     # procedures.
-    - ./environment/pre-install.sh:/root/pre-install.sh
-    - ./environment/post-install.sh:/root/post-install.sh
+    - ./scripts/pre-install.sh:/root/pre-install.sh
+    - ./scripts/post-install.sh:/root/post-install.sh
     # If you want to use sql-sync-like automate procedures, we need authorized
     # keys here.
     # You will be also allowed to ssh into container from another authorized
