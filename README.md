@@ -1,50 +1,71 @@
 # Drupal Boilerplate for D7 and D8 projects
 
-This is new version of this boilerplate project which is Docker-oriented 
-only. Use it to start new Drupal project.
+New version of drupal-boilerplate project which is now Docker-oriented. Use it to 
+start new Drupal project or you can add it to existing project. All you need to 
+do is:
+````bash
+curl -s https://raw.githubusercontent.com/zaporylie/drupal-boilerplate/master/scripts/install.sh | sh
+````
+That command will download repository for you and extract it to the current 
+directory.
 
-## Docker way
+You can also do it manually - download [ZIP](https://github.com/zaporylie/drupal-boilerplate/archive/master.zip) 
+file and extract it to preferred destination.
 
-Right now this is the only supported way of running projects, although
-you can run docker host with vagrant for OSX support (it's still
-much faster than separate VBox-per-project).
+## Docker
+
+drupal-boilerplate repository has a few docker-compose YAML files which helps 
+you start group of containers required to run Drupal site. All you need to do is
+type one of `docker-compose up` commands. More about how to "up" your project in
+["Running"](#running) section.
 
 ### Requirements
 
+* Linux
+
+Since we want to use Docker containers to run our project we need our host to
+has Linux operating system. Read more about docker requirements on 
+http://docker.com
+If you are OSX user - nothing is lost. You can use boot2docker 
+or [docker-host](https://github.com/zaporylie/docker-host) which was a part of 
+this project before but now is hosted as a separate project.
+
 * [docker](https://docs.docker.com/installation/ubuntulinux/)
+
 ````
 # You can use this command on Ubuntu to install it.
 curl -sSL https://get.docker.com/ubuntu/ | sudo sh
 ````
+
 * [docker-compose](http://docs.docker.com/compose/install/)
+
 ````
 # The easiest way to install on ubuntu is:
 curl -L https://github.com/docker/compose/releases/download/1.1.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ````
-or run docker-host which will install everything for you.
 
-### Running
+### Running <a id="running"></a>
 
 All you need is one of these commands:
 ````
-# To run selected yml file:
-docker-compose --file=docker-compose-production.yml up -d
 # To run default file (docker-compose.yml):
 docker-compose up -d
-# or create another .yml file right for your environment/configuration
-# and run it.
+
+# To run selected yml file:
+docker-compose --file=docker-compose-production.yml up -d
 ````
+
 Notice, that flag -d means detached mode, so use `docker-compose logs` for more
 information about running services.
+`docker-compose ps` will give you overview about running containers.
 
-## Vagrant (docker-host)
-
-For vagrant support, check [/environment/docker-host](environment/docker-host)
-
-## Usefull containers:
+### Recommended additional containers:
 
 * Use [nginx-proxy](https://github.com/jwilder/nginx-proxy) to get domain support 
 for new project and proxy traffic on port 80 (eventually 443) to your container
 (which, by default, has random port).
-Notice, that nginx-proxy will be ready and running if you will start with [docker-host](environment/docker-host)
+
+## Credits
+
+Repository was created by zaporylie <jakub@piaseccy.pl> with Ny Media AS support.
