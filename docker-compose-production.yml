@@ -75,6 +75,12 @@ drupal:
     # If you are using vagrant-host from drupal-boilerplate:
     # - /home/vagrant/identity:/root/.ssh
     - ~/.ssh:/root/.ssh
+    # Since connection is based on public-private pair of keys we need to know
+    # username. This repo was configured to check for files in /drush/local
+    # folder to find user/environment specific data, like username. You can
+    # mount this as a volume or add it manually. Mounting would be usefull
+    # for automated builds.
+    # - path/to/local/folder:/app/drush/local
     # If you want to run database from sql-dump file, mount it in /var/backups/db
     # and set right sync method.
     # - path/to/your/file:/var/backups/db.sql

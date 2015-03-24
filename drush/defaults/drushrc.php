@@ -39,10 +39,10 @@ $options['shell-aliases']['unsuck'] = 'pm-disable -y overlay,dashboard';
 
 
 /**
- * Use local.drushrc.php file to override Drush aliases configuration.
+ * Use local/drushrc.php file to override Drush aliases configuration.
  *
  * Keep this code block at the end of this file to take full effect.
  */
-if (file_exists(dirname(__FILE__) . '/local.drushrc.php')) {
-  include dirname(__FILE__) . '/local.drushrc.php';
+if (file_exists(dirname(__FILE__) . '/local/drushrc.php')) {
+  include dirname(__FILE__) . '/local/drushrc.php';
 }
