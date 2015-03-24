@@ -28,6 +28,15 @@ $aliases['main'] = array(
 );
 
 // use '-o StrictHostKeyChecking=no' to make new environment accessible for start.sh
+$aliases['prod'] = array(
+  'parent' => '@main',
+  // 'uri' => '', // i.e. www.example.com
+  // 'root' => '', // i.e. /var/www/example.com
+  // 'remote-host' => '', // i.e. dev.example.com
+  // 'ssh-options' => '', // i.e. -p 23
+);
+
+// use '-o StrictHostKeyChecking=no' to make new environment accessible for start.sh
 $aliases['staging'] = array(
   'parent' => '@main',
   // 'uri' => '', // i.e. www.example.com
@@ -36,12 +45,13 @@ $aliases['staging'] = array(
   // 'ssh-options' => '-o StrictHostKeyChecking=no', // i.e. -p 23  -o StrictHostKeyChecking=no
 );
 
-$aliases['prod'] = array(
-  'parent' => '@main',
+// use '-o StrictHostKeyChecking=no' to make env accessible for start.sh
+$aliases['dev'] = array(
+  'parent' => '@main, @local',
   // 'uri' => '', // i.e. www.example.com
   // 'root' => '', // i.e. /var/www/example.com
   // 'remote-host' => '', // i.e. dev.example.com
-  // 'ssh-options' => '', // i.e. -p 23
+  // 'ssh-options' => '-o StrictHostKeyChecking=no', // i.e. -p 23 -o StrictHostKeyChecking=no
 );
 
 $aliases['local'] = array(
@@ -73,15 +83,6 @@ $aliases['local'] = array(
   ),
 );
 
-// use '-o StrictHostKeyChecking=no' to make env accessible for start.sh
-$aliases['dev'] = array(
-  'parent' => '@main, @local',
-  // 'uri' => '', // i.e. www.example.com
-  // 'root' => '', // i.e. /var/www/example.com
-  // 'remote-host' => '', // i.e. dev.example.com
-  // 'ssh-options' => '-o StrictHostKeyChecking=no', // i.e. -p 23 -o StrictHostKeyChecking=no
-);
-
 /**
  * Load local development override configuration, if available.
  *
@@ -91,6 +92,6 @@ $aliases['dev'] = array(
  *
  * Keep this code block at the end of this file to take full effect.
  */
-if (file_exists(dirname(__FILE__) . '/../local.default.aliases.drushrc.php')) {
-  include dirname(__FILE__) . '/../local.default.aliases.drushrc.php';
+if (file_exists(dirname(__FILE__) . '/../local/default.aliases.drushrc.php')) {
+  include dirname(__FILE__) . '/../local/default.aliases.drushrc.php';
 }

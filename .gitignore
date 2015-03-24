@@ -2,7 +2,7 @@
 #########################
 # Ignore configuration files that may contain sensitive information.
 drupal/sites/*/settings*.php
-drush/local.*
+drush/local/*
 
 # PHPStorm user sensitive files #
 #################################

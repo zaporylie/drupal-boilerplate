@@ -8,9 +8,9 @@ fi
 # Copy some defaults if do not exists
 for f in /app/drush/defaults/modules/* ; do cp -n "$f" "/app/drush/modules" ; done
 for f in /app/drush/defaults/aliases/* ; do cp -n "$f" "/app/drush/aliases" ; done
-cp -n /app/drush/defaults/local.default.aliases.drushrc.php /app/drush/local.default.aliases.drushrc.php
+mkdir -p /app/drush/local
+for f in /app/drush/defaults/local/* ; do cp -n "$f" "/app/drush/local" ; done
 cp -n /app/drush/defaults/drushrc.php /app/drush/drushrc.php
-cp -n /app/drush/defaults/local.drushrc.php /app/drush/local.drushrc.php
 
 # Symlink to project drushrc.php file.
 mkdir -p $HOME/.drush

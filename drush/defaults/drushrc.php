@@ -43,6 +43,6 @@ $options['shell-aliases']['unsuck'] = 'pm-disable -y overlay,dashboard';
  *
  * Keep this code block at the end of this file to take full effect.
  */
-if (file_exists(dirname(__FILE__) . '/local.drushrc.php')) {
-  include dirname(__FILE__) . '/local.drushrc.php';
+if (file_exists(dirname(__FILE__) . '/local/drushrc.php')) {
+  include dirname(__FILE__) . '/local/drushrc.php';
 }
