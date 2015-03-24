@@ -86,9 +86,9 @@ $aliases['local'] = array(
 /**
  * Load local development override configuration, if available.
  *
- * Use local.default.aliases.drushrc.php to override Drush aliases configuration.
+ * Use local/default.aliases.drushrc.php to override Drush aliases configuration.
  * If you will copy this file to add drush alias to another drupal site folder
- * (sites/*) copy local... file as well and change name below.
+ * (sites/*) copy local/ file as well and change name below.
  *
  * Keep this code block at the end of this file to take full effect.
  */
