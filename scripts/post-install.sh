@@ -10,7 +10,36 @@ echo "Result: ${METHOD_AUTO_RESULT}"
 
 # Make sure that we have all usefull modules for dev environment
 if [ "${ENVIRONMENT}" = "DEV" ] && [ "${METHOD_AUTO_RESULT}" = "new_install" ]; then
-  cd /app/drupal && drush dl fpa, module_filter, coffee, stage_file_proxy, devel, search_krumo, reroute_email -y --destination=sites/all/modules/contrib
+  # Download fpa if unavailable
+  if [ "$(drush @"${DRUPAL_SUBDIR}.local" pml | grep fpa | wc -l)" = "0" ]; then
+    drush @"${DRUPAL_SUBDIR}.local" dl fpa -y --destination=sites/all/modules/contrib
+  fi
+  # Download module_filter if unavailable
+  if [ "$(drush @"${DRUPAL_SUBDIR}.local" pml | grep module_filter | wc -l)" = "0" ]; then
+    drush @"${DRUPAL_SUBDIR}.local" dl module_filter -y --destination=sites/all/modules/contrib
+  fi
+  # Download coffee if unavailable
+  if [ "$(drush @"${DRUPAL_SUBDIR}.local" pml | grep coffee | wc -l)" = "0" ]; then
+    drush @"${DRUPAL_SUBDIR}.local" dl coffee -y --destination=sites/all/modules/contrib
+  fi
+  # Download stage_file_proxy if unavailable
+  if [ "$(drush @"${DRUPAL_SUBDIR}.local" pml | grep stage_file_proxy | wc -l)" = "0" ]; then
+    drush @"${DRUPAL_SUBDIR}.local" dl stage_file_proxy -y --destination=sites/all/modules/contrib
+  fi
+  # Download devel if unavailable
+  if [ "$(drush @"${DRUPAL_SUBDIR}.local" pml | grep devel | wc -l)" = "0" ]; then
+    drush @"${DRUPAL_SUBDIR}.local" dl devel -y --destination=sites/all/modules/contrib
+  fi
+  # Download search_krumo if unavailable
+  if [ "$(drush @"${DRUPAL_SUBDIR}.local" pml | grep search_krumo | wc -l)" = "0" ]; then
+    drush @"${DRUPAL_SUBDIR}.local" dl search_krumo -y --destination=sites/all/modules/contrib
+  fi
+  # Download reroute_email if unavailable
+  if [ "$(drush @"${DRUPAL_SUBDIR}.local" pml | grep reroute_email | wc -l)" = "0" ]; then
+    drush @"${DRUPAL_SUBDIR}.local" dl reroute_email -y --destination=sites/all/modules/contrib
+  fi
+
+  # cd /app/drupal && drush dl fpa, module_filter, coffee, stage_file_proxy, devel, search_krumo, reroute_email -y --destination=sites/all/modules/contrib
 fi
 
 # Check if SYNC_SOURCE exists and if is accessible
