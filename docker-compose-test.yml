@@ -1,0 +1,20 @@
+datamysql:
+  extends:
+    file: docker-compose.yml
+    service: datamysql
+
+datadrupal:
+  extends:
+    file: docker-compose.yml
+    service: datadrupal
+
+mysql:
+  extends:
+    file: docker-compose.yml
+    service: mysql
+
+drupal:
+  extends:
+    file: docker-compose.yml
+    service: drupal
+  command: /root/conf/test.sh
