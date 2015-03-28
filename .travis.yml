@@ -5,7 +5,6 @@ env:
     - "HOST_IP=$(/sbin/ifconfig venet0:0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')"
     - DOCKER_HOST=tcp://$HOST_IP:2375
     - SLIRP_PORTS="2375 $(seq 49153 49253)"
-    - DOCKER_CERT_PATH=/var/lib/docker
 
 
 before_install:
@@ -18,16 +17,19 @@ install:
   - sudo apt-get -qqy update
   - sudo apt-get -qqy install lxc lxc-docker-1.4.1 slirp
   - sudo usermod -aG docker "$USER"
-  - curl -L https://github.com/docker/compose/releases/download/1.2.0rc2/docker-compose-`uname -s`-`uname -m` > ./docker-compose
-  - chmod +x ./docker-compose
+  - mkdir -p $HOME/bin
+  - curl -L https://github.com/docker/compose/releases/download/1.2.0rc2/docker-compose-`uname -s`-`uname -m` > ./bin/docker-compose
+  - chmod +x ./bin/docker-compose
   - git clone git://github.com/cptactionhank/sekexe
 
 before_script:
-  - "sekexe/run 'mount -t tmpfs -o size=8g tmpfs /var/lib/docker && docker -d -H tcp://0.0.0.0:2375' &"
+  - "sekexe/run 'export DOCKER_CERT_PATH=/var/lib/docker && mount -t tmpfs -o size=8g tmpfs /var/lib/docker && docker -d -H tcp://0.0.0.0:2375' &"
   - "while ! docker info &> /dev/null ; do sleep 1; done"
+  - "export PATH=$PATH:$HOME/bin"
 
 script:
-  - docker version
+  - docker --version
+  - docker-compose --version
   - echo $PATH
   - ls -la
 #  - docker pull zaporylie/drupal-dev
