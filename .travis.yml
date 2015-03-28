@@ -18,8 +18,8 @@ install:
   - sudo apt-get -qqy install lxc lxc-docker-1.4.1 slirp
   - sudo usermod -aG docker "$USER"
   - mkdir -p $HOME/bin
-  - curl -L https://github.com/docker/compose/releases/download/1.2.0rc2/docker-compose-`uname -s`-`uname -m` > ./bin/docker-compose
-  - chmod +x ./bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.2.0rc2/docker-compose-`uname -s`-`uname -m` > $HOME/bin/docker-compose
+  - chmod +x $HOME/bin/docker-compose
   - git clone git://github.com/cptactionhank/sekexe
 
 before_script:
@@ -34,5 +34,5 @@ script:
   - ls -la
 #  - docker pull zaporylie/drupal-dev
 #  - docker pull mysql:5.5
-  - ./docker-compose --file=docker-compose-test.yml up
+  - $HOME/bin/docker-compose --file=docker-compose-test.yml up
   - docker ps -a
