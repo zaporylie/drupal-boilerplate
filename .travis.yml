@@ -13,7 +13,7 @@ before_install:
   - echo exit 101 | sudo tee /usr/sbin/policy-rc.d
   - sudo chmod +x /usr/sbin/policy-rc.d
   - sudo touch /usr/local/bin/docker-compose
-  - sudo chmod +x /usr/local/bin/docker-compose
+  - sudo chmod +wx /usr/local/bin/docker-compose
 
 install:
   - sudo apt-get -qqy update
