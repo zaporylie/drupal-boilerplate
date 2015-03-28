@@ -68,7 +68,7 @@ drupal:
     # host (as root).
     # If you are using vagrant-host from drupal-boilerplate:
     # - /home/vagrant/identity:/root/.ssh
-    - ~/.ssh:/root/.ssh
+    # - ~/.ssh:/root/.ssh
     # Since connection is based on public-private pair of keys we need to know
     # username. This repo was configured to check for files in /drush/local
     # folder to find user/environment specific data, like username. You can
