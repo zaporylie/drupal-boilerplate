@@ -12,9 +12,15 @@ mysql:
   extends:
     file: docker-compose.yml
     service: mysql
+  volumes_from:
+    - datamysql
 
 drupal:
   extends:
     file: docker-compose.yml
     service: drupal
   command: "/root/conf/test.sh"
+  volumes_from:
+    - datadrupal
+  links:
+    - mysql:mysql
