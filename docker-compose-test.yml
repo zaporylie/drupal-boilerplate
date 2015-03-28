@@ -1,26 +1,30 @@
 datamysql:
   extends:
-    file: docker-compose.yml
+    file: docker-compose-common.yml
     service: datamysql
 
 datadrupal:
   extends:
-    file: docker-compose.yml
+    file: docker-compose-common.yml
     service: datadrupal
 
 mysql:
   extends:
-    file: docker-compose.yml
+    file: docker-compose-common.yml
     service: mysql
+  # Take all volumes exposed by [datamysql] and mount it here.
   volumes_from:
     - datamysql
 
 drupal:
   extends:
-    file: docker-compose.yml
+    file: docker-compose-common.yml
     service: drupal
   command: "/root/conf/test.sh"
   volumes_from:
     - datadrupal
+  # Links to mysql process (via socket).
   links:
+    # First [mysql] is name of deamon container, second <mysql> is required by
+    # application. If you want to change it, set MYSQL_HOST_NAME as well.
     - mysql:mysql
