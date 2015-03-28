@@ -53,9 +53,6 @@ drupal:
   # supervisor takes care to run all services for you.
   # @see https://registry.hub.docker.com/u/zaporylie/drupal
   image: zaporylie/drupal
-  # Mount data from data-only container.
-  volumes_from:
-    - datadrupal
   # All volumes in that section are optional
   volumes:
     # This are pre and post-install scripts (check start.sh provided by

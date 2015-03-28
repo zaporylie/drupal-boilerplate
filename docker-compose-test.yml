@@ -21,6 +21,7 @@ drupal:
     file: docker-compose-common.yml
     service: drupal
   command: "/root/conf/test.sh"
+  # Mount data from data-only container.
   volumes_from:
     - datadrupal
   # Links to mysql process (via socket).
