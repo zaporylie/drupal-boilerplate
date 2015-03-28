@@ -29,5 +29,5 @@ script:
   - docker version
   - docker pull zaporylie/drupal-dev
   - docker pull mysql:5.5
-  - sed -ri 's/^command\s*:\s*\/root\/run.sh/command: \/root\/conf\/test.sh/g' docker-compose.yml && docker-compose up -d
+  - "sed -ri 's/^command\s*:\s*\/root\/run.sh/command: \/root\/conf\/test.sh/g' docker-compose.yml && docker-compose up -d"
   - docker ps -a
