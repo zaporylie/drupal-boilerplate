@@ -17,4 +17,4 @@ drupal:
   extends:
     file: docker-compose.yml
     service: drupal
-  command: /root/conf/test.sh
+  command: "/root/conf/test.sh"
