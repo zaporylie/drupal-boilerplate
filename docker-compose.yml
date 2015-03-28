@@ -53,3 +53,4 @@ drupal:
     - "80"
     - "22"
     - "9000"
+  command: /root/run.sh
