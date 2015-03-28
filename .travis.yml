@@ -31,5 +31,5 @@ script:
   - docker version
 #  - docker pull zaporylie/drupal-dev
 #  - docker pull mysql:5.5
-  - docker-compose --file=docker-compose-test.yml up
+  - ./docker-compose --file=docker-compose-test.yml up
   - docker ps -a
