@@ -18,8 +18,9 @@ before_install:
 install:
   - sudo apt-get -qqy update
   - sudo apt-get -qqy install lxc lxc-docker-1.2.0 slirp
-  - sudo sudo usermod -aG docker "$USER"
-  - curl -L https://github.com/docker/compose/releases/download/1.1.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+  - sudo usermod -aG docker "$USER"
+  - curl -L https://github.com/docker/compose/releases/download/1.1.0/docker-compose-`uname -s`-`uname -m` > ./docker-compose
+  - sudo mv ./docker-compose /usr/local/bin/docker-compose
   - git clone git://github.com/cptactionhank/sekexe
 
 before_script:
