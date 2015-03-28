@@ -17,8 +17,9 @@ before_install:
 
 install:
   - sudo apt-get -qqy update
-  - curl -sSL https://get.docker.com/ubuntu/ | sudo sh
-#  - sudo apt-get -qqy install lxc lxc-docker slirp
+#  - curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+#  - sudo apt-get -qqy install slirp
+  - sudo apt-get -qqy install lxc lxc-docker-1.4.1 slirp
   - sudo usermod -aG docker "$USER"
   - curl -L https://github.com/docker/compose/releases/download/1.2.0rc2/docker-compose-`uname -s`-`uname -m` > ./docker-compose
   - chmod +x ./docker-compose
