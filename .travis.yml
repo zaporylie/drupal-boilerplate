@@ -20,7 +20,8 @@ install:
   - mkdir -p $HOME/bin
   - curl -L https://github.com/docker/compose/releases/download/1.2.0rc2/docker-compose-`uname -s`-`uname -m` > $HOME/bin/docker-compose
   - chmod +x $HOME/bin/docker-compose
-#  - sudo chown -R www-data:www-data ./
+  - sudo chown -R www-data:www-data ./drupal
+  - sudo chown -R www-data:www-data ./drush
   - git clone git://github.com/cptactionhank/sekexe
 
 before_script:
@@ -34,4 +35,4 @@ script:
   - echo $PATH
   - ls -la
   - docker-compose --file=docker-compose-test.yml run drupal
-  - docker-compose ps -a
+  - docker-compose ps
