@@ -1,0 +1,38 @@
+language: c
+
+env:
+  global:
+    - "HOST_IP=$(/sbin/ifconfig venet0:0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')"
+    - DOCKER_HOST=tcp://$HOST_IP:2375
+    - SLIRP_PORTS="2375 $(seq 49153 49253)"
+
+
+before_install:
+  - sudo sh -c "wget -qO- https://get.docker.io/gpg | apt-key add -"
+  - sudo sh -c "echo deb http://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
+  - echo exit 101 | sudo tee /usr/sbin/policy-rc.d
+  - sudo chmod +x /usr/sbin/policy-rc.d
+
+install:
+  - sudo apt-get -qqy update
+  - sudo apt-get -qqy install lxc lxc-docker-1.4.1 slirp
+  - sudo usermod -aG docker "$USER"
+  - mkdir -p $HOME/bin
+  - curl -L https://github.com/docker/compose/releases/download/1.2.0rc2/docker-compose-`uname -s`-`uname -m` > $HOME/bin/docker-compose
+  - chmod +x $HOME/bin/docker-compose
+  - sudo chown -R www-data:www-data ./drupal
+  - sudo chown -R www-data:www-data ./drush
+  - git clone git://github.com/cptactionhank/sekexe
+
+before_script:
+  - "sekexe/run 'export DOCKER_CERT_PATH=/var/lib/docker && mount -t tmpfs -o size=8g tmpfs /var/lib/docker && docker -d -H tcp://0.0.0.0:2375' &"
+  - "while ! docker info &> /dev/null ; do sleep 1; done"
+  - "export PATH=$PATH:$HOME/bin"
+
+script:
+  - docker --version
+  - docker-compose --version
+  - echo $PATH
+  - ls -la
+  - docker-compose --file=docker-compose-test.yml run drupal
+  - docker-compose ps

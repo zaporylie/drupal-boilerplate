@@ -3,9 +3,11 @@
 New version of drupal-boilerplate project which is now Docker-oriented. Use it to 
 start new Drupal project or you can add it to existing project. All you need to 
 do is:
+
 ````bash
 curl -s https://raw.githubusercontent.com/zaporylie/drupal-boilerplate/master/scripts/install.sh | sh
 ````
+
 That command will download repository for you and extract it to the current 
 directory.
 
@@ -14,8 +16,8 @@ file and extract it to preferred destination.
 
 ## Docker
 
-drupal-boilerplate repository has a few docker-compose YAML files which helps 
-you start group of containers required to run Drupal site. All you need to do is
+zaporylie/drupal-boilerplate project has a few docker-compose YAML files which helps 
+you to start group of containers required to run Drupal site. All you need to do is
 type one of `docker-compose up` commands. More about how to "up" your project in
 ["Running"](#running) section.
 
@@ -47,7 +49,7 @@ chmod +x /usr/local/bin/docker-compose
 
 ### Running <a id="running"></a>
 
-All you need is one of these commands:
+All you need to do is execute one of following commands:
 ````
 # To run default file (docker-compose.yml):
 docker-compose up -d
@@ -56,9 +58,10 @@ docker-compose up -d
 docker-compose --file=docker-compose-production.yml up -d
 ````
 
-Notice, that flag -d means detached mode, so use `docker-compose logs` for more
-information about running services.
-`docker-compose ps` will give you overview about running containers.
+Notice, that flag -d means detached mode so your project will be run in 
+background mode. You can use `docker-compose logs` for more information about it.
+`docker-compose ps` will give you overview about all running containers belongs
+to project.
 
 ### Recommended additional containers:
 
