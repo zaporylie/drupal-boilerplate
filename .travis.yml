@@ -19,4 +19,4 @@ script:
   # Show all docker images.
   - docker images
   # Show all container.
-  - docker-compose run -e TEST_BUILD=true drupal
+  - docker-compose run -e BUILD_TEST=1 drupal
