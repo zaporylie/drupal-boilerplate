@@ -19,6 +19,8 @@ drupal:
   extends:
     file: ./.docker-compose-common.yml
     service: drupal
+  environment:
+    - BUILD_TEST=1
   volumes_from:
     - datadrupal
   links:

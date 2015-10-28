@@ -1,0 +1,43 @@
+# Data-only container
+datamysql:
+  image: mysql:5.5
+  entrypoint: /bin/echo
+  command: MySQL data-only container
+
+# Data-only container
+datadrupal:
+  image: zaporylie/drupal
+  volumes:
+    - ./:/app
+  entrypoint: /bin/echo
+  command: APP data-only container
+
+# MySQL service container
+mysql:
+  image: mysql:5.5
+  environment:
+    MYSQL_ROOT_PASSWORD: secret_password
+
+# Drupal container
+drupal:
+  image: zaporylie/drupal
+  volumes:
+    - ./scripts/pre-install.sh:/root/conf/pre-install.sh
+    - ./scripts/post-install.sh:/root/conf/post-install.sh
+  environment:
+    DRUPAL_DB: drupal
+    DRUPAL_DB_USER: drupal
+    DRUPAL_DB_PASSWORD: drupal
+    DRUPAL_PROFILE: standard
+    DRUPAL_SUBDIR: default
+    DRUPAL_MAJOR_VERSION: 7
+    DRUPAL_DOWNLOAD_METHOD: drush
+    METHOD: auto
+    MYSQL_HOST_NAME: mysql
+    VIRTUAL_HOST: drupal.*
+    SYNC_METHOD: FILE
+    SYNC_SOURCE: none
+    ENVIRONMENT: DEV
+  ports:
+    - "80"
+    - "22"
