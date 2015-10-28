@@ -22,4 +22,4 @@ drupal:
   volumes_from:
     - datadrupal
   links:
-    - mysql:mysql
+    - mysql:db
