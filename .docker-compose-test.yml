@@ -20,8 +20,8 @@ drupal:
     file: ./.docker-compose-common.yml
     service: drupal
   environment:
-    - BUILD_TEST=1
+    - TEST_BUILD=1
   volumes_from:
     - datadrupal
   links:
-    - mysql:mysql
+    - mysql:db

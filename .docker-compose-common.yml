@@ -6,9 +6,7 @@ datamysql:
 
 # Data-only container
 datadrupal:
-  image: zaporylie/drupal
-  volumes:
-    - ./:/app
+  image: zaporylie/drupal:2
   entrypoint: /bin/echo
   command: APP data-only container
 
@@ -20,24 +18,15 @@ mysql:
 
 # Drupal container
 drupal:
-  image: zaporylie/drupal
-  volumes:
-    - ./scripts/pre-install.sh:/root/conf/pre-install.sh
-    - ./scripts/post-install.sh:/root/conf/post-install.sh
+  build: .
   environment:
-    DRUPAL_DB: drupal
-    DRUPAL_DB_USER: drupal
-    DRUPAL_DB_PASSWORD: drupal
+    DB_NAME: drupal
+    DB_USER: drupal
+    DB_PASSWORD: drupal
     DRUPAL_PROFILE: standard
     DRUPAL_SUBDIR: default
-    DRUPAL_MAJOR_VERSION: 7
-    DRUPAL_DOWNLOAD_METHOD: drush
-    METHOD: auto
-    MYSQL_HOST_NAME: mysql
-    VIRTUAL_HOST: drupal.*
-    SYNC_METHOD: FILE
-    SYNC_SOURCE: none
-    ENVIRONMENT: DEV
+    DB_SYNC_METHOD: auto
+    DB_SYNC_DRUSH_FROM: dev
   ports:
     - "80"
     - "22"
