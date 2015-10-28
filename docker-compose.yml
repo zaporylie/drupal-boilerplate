@@ -1,55 +1,27 @@
-# Run this configuration if you need xdebug
-# That's almost the same file as production with only few changes.
-# Documentation available in docker-compose-production file.
-#
-# @author zaporylie <jakub@piaseccy.pl>
-
 datamysql:
-  image: mysql:5.5
-  entrypoint: /bin/echo
-  command: MySQL data-only container
+  extends:
+    file: ./.docker-compose-common.yml
+    service: datamysql
 
 datadrupal:
-  image: zaporylie/drupal-dev
-  volumes:
-    - ./:/app
-  entrypoint: /bin/echo
-  command: APP data-only container
+  extends:
+    file: ./.docker-compose-common.yml
+    service: datadrupal
 
 mysql:
-  image: mysql:5.5
-  environment:
-    MYSQL_ROOT_PASSWORD: secret_password
+  extends:
+    file: ./.docker-compose-common.yml
+    service: mysql
   volumes_from:
     - datamysql
 
 drupal:
-  image: zaporylie/drupal-dev
+  extends:
+    file: ./.docker-compose-common.yml
+    service: drupal
+  environment:
+    - BUILD_TEST=1
   volumes_from:
     - datadrupal
-  volumes:
-    - ./scripts/pre-install.sh:/root/conf/pre-install.sh
-    - ./scripts/post-install.sh:/root/conf/post-install.sh
-    # - ~/.ssh:/root/.ssh
-    # - path/to/local/folder:/app/drush/local
-    # - path/to/your/file:/var/backups/db.sql
   links:
     - mysql:mysql
-  environment:
-    DRUPAL_DB: drupal
-    DRUPAL_DB_USER: drupal
-    DRUPAL_DB_PASSWORD: drupal
-    DRUPAL_PROFILE: minimal
-    DRUPAL_SUBDIR: default
-    DRUPAL_MAJOR_VERSION: 7
-    DRUPAL_DOWNLOAD_METHOD: drush
-    METHOD: auto
-    MYSQL_HOST_NAME: mysql
-    VIRTUAL_HOST: drupal1.*
-    SYNC_METHOD: AUTO
-    SYNC_SOURCE: staging
-    ENVIRONMENT: DEV
-  ports:
-    - "80"
-    - "22"
-    - "9000"
