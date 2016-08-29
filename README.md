@@ -1,4 +1,8 @@
-# Drupal Boilerplate for D7 and D8 projects
+# [Deprecated] Drupal Boilerplate for D7 and D8 projects 
+
+**Thanks for your interest but this project is now deprecated. Visit http://github.com/drupal-docker if you're looking for Drupal-Docker integration. Following organization is a direct successor of all repos which are related to Drupal&Docker and created by me. Thanks and good luck!**
+
+## Description
 
 New version of drupal-boilerplate project which is now Docker-oriented. Use it to 
 start new Drupal project or you can add it to existing project. All you need to 
