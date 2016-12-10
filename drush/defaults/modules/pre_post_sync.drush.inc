@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implements drush_hook_post_COMMAND().
+ * Implements drush_hook_pre_COMMAND().
  */
 function drush_pre_post_sync_pre_sql_sync($source = NULL, $destination = NULL) {
   // Clean database?
